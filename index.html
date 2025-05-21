@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(to right, #1f1c2c, #928dab);
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 10px;
+    }
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Something Special</h1>
+  <p>Please enter the secret password to continue:</p>
+  <input type="password" id="password" placeholder="Enter password" />
+  <br>
+  <button onclick="checkPassword()">Submit</button>
+  <div id="error"></div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById('password').value;
+      if (password === 'Kanaknaman2125!!') {
+       window.location.href = 'home.html'; // Change this to your first page
+      } else {
+        document.getElementById('error').innerText = 'Wrong password. Try again.';
+      }
+    }
+  </script>
+</body>
+</html>
