@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bonus Reward</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #2b1055, #000);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .music-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .floating-emoji {
+      position: fixed;
+      font-size: 2rem;
+      opacity: 0.3;
+      animation: float 8s infinite ease-in-out;
+    }
+
+    .e1 { top: 10%; left: 5%; animation-delay: 0s; }
+    .e2 { top: 20%; right: 10%; animation-delay: 1s; }
+    .e3 { bottom: 15%; left: 20%; animation-delay: 2s; }
+    .e4 { bottom: 10%; right: 15%; animation-delay: 3s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.2; }
+      50% { transform: translateY(-20px); opacity: 0.5; }
+      100% { transform: translateY(0); opacity: 0.2; }
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 100px auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .reward-box {
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 15px;
+      animation: sparkle 2s infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #f0f; }
+      50% { color: #ff99ff; text-shadow: 0 0 15px #ff99ff, 0 0 30px #f0f; }
+    }
+
+    .hug {
+      font-size: 2.5rem;
+      margin-top: 20px;
+    }
+
+    .media-rewards {
+      margin-top: 30px;
+    }
+
+    .media-rewards img, .media-rewards video {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .media-rewards a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #ff99ff;
+      font-weight: bold;
+      font-size: 18px;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px 20px;
+      border-radius: 25px;
+      box-shadow: 0 0 12px #ffb3ff;
+      transition: background 0.3s ease;
+    }
+
+    .media-rewards a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Password Section */
+    .password-section {
+      margin-top: 50px;
+    }
+
+    .password-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    input[type="password"] {
+      padding: 12px 15px;
+      font-size: 16px;
+      border-radius: 30px;
+      border: none;
+      outline: none;
+      width: 220px;
+      text-align: center;
+      background: linear-gradient(145deg, #f0d9ff, #d7a3ff);
+      color: #4a004e;
+      box-shadow: 0 0 15px rgba(255,182,255,0.5);
+      transition: all 0.3s ease;
+    }
+
+    input[type="password"]::placeholder {
+      color: #7d3c98;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 15px;
+      border-radius: 30px;
+      border: none;
+      background: linear-gradient(135deg, #ff99ff, #c471ed);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 12px #ffb3ff;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .audio-section {
+      margin-top: 40px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Music -->
+  <audio id="bgMusic" loop>
+    <source src="surprise.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+  <div class="music-toggle" onclick="toggleMusic()">🫢</div>
+
+  <!-- Floating Emojis -->
+  <div class="floating-emoji e1">✨</div>
+  <div class="floating-emoji e2">🥺</div>
+  <div class="floating-emoji e3">💞</div>
+  <div class="floating-emoji e4">🌈</div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h3>..★.🌚Achievement Unlocked🌝.♥..</h3>
+    <h1>Bonus Reward Just for You you made it👀(⁠◔⁠‿⁠◔⁠)</h1>
+    <p>
+      nicely tumne hr ek question ka answer as a honest Tarike se diyaa u made it jaan🔥 loove uh 😘<br>
+      so enjoy ur reward 🐱 scroll...
+    </p>
+
+    <div class="reward-box">
+      <p><strong>Reward:</strong> Jab bhi tum udaas ho, confused ho, ya bas ek pyara sa hug chahiye ho...<br><br>
+      <span class="hug">i will always here</span><br><br>
+      A tight virtual cuddle, wrapped in love, just for you. Always!</p>
+
+      <!-- Media Rewards -->
+      <div class="media-rewards">
+        <img src="normal.png" alt="Cute Memory Photo" />
+        <h3>i love u 1000 more♥️(video):-</h3>
+        <video controls>
+          <source src="play.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- Audio Section moved out of sparkle box -->
+    <div class="audio-section">
+      <p style="font-size: 18px; margin-bottom: 10px;">Bonus Audio Messages for You:</p>
+      <h5>you know i tried to sing a song from "jb we meet" so kafii bekar ho raha tha sb qki as u know hume sardii hai or cough bhi soo meinee saree jitnee bhi try kiya hai unmain se kuch hum yaha tumhe sunayenge 🙃 letzz gooo... play it</h5>
+      <audio controls style="width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);">
+        <source src="dual.m4a" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <h5>In above audio🙃 i am singing with a man from instagram qki ye jo lyrics hai usiine banaya hai, by the way meine save kiya hai uska reel tum bhi dekh lena ek baar🙂 because if i am using his new lyrics so uska bhi promotion hona chaiye thodaa..🐝usne bhi mehnat kiya hoga likhne main👾 
+  meine iss Audio ko reject kr diya wo qki mere ko solo chiye not dual that's why its here💕 letzz go too new audio of me🙃... play it</h5>
+  <audio controls style="width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);">
+        <source src="notification.m4a" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <h5> is audio mein ek notification ke vibration ne sb barbaad kr diya🥲 by the way if tumhe notice nai hua too hum kafii dhireee gaa rahe hai because of this reason in first Audio ,i am singing with the instagram man so that speed pata chal jaaye.. chalo koi na letzz go too next audio.. play it</h5>
+      <audio controls style="width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);">
+        <source src="selected.m4a" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <h5>This is the audio which i selected ki haa ye sahi he hua hai actually mere ko cough hai too uss hisab se sahi hai ye😅 and yess 🙃 if you want thiese all audios they all audio get directly send to u if u say so🙃</h5> 
+      <h3>So that set ummid krta hu apko ye website pasand aaya hoga😌😋thankuu</h3>
+    </div>
+
+    <!-- Password Section -->
+    <div class="password-section">
+      <p style="margin-bottom: 15px; font-size: 18px;">There’s something <em>hidden</em> for you... Want to unlock it?</p>
+      <div class="password-container">
+        <input type="password" id="passwordInput" placeholder="Enter the magic password">
+        <button onclick="checkPassword()">Unlock</button>
+      </div>
+      <p id="errorMsg" style="color: pink; margin-top: 10px; display: none;">Oops! Wrong password. Try again, love.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const bgMusic = document.getElementById('bgMusic');
+    const toggleBtn = document.querySelector('.music-toggle');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTime = localStorage.getItem("musicTime");
+      const wasPaused = localStorage.getItem("musicPaused") === "true";
+
+      if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+      if (!wasPaused) {
+        bgMusic.play();
+        toggleBtn.textContent = '🎵';
+      } else {
+        toggleBtn.textContent = '🫢';
+      }
+    });
+
+    function toggleMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        toggleBtn.textContent = '🎵';
+        localStorage.setItem("musicPaused", "false");
+      } else {
+        bgMusic.pause();
+        toggleBtn.textContent = '🫢';
+        localStorage.setItem("musicPaused", "true");
+      }
+    }
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      const errorMsg = document.getElementById("errorMsg");
+      if (input === "Kanaknamanforever2125!!") {
+        window.location.href = "bonus.html";
+      } else {
+        errorMsg.style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
