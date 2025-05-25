@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory 7</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #2b1055, #7597de);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .emoji-floating {
+      position: fixed;
+      font-size: 2rem;
+      animation: float 8s infinite ease-in-out;
+      opacity: 0.3;
+    }
+    .emoji1 { top: 10%; left: 5%; animation-delay: 0s; }
+    .emoji2 { top: 20%; right: 10%; animation-delay: 1s; }
+    .emoji3 { bottom: 15%; left: 20%; animation-delay: 2s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.2; }
+      50% { transform: translateY(-20px); opacity: 0.5; }
+      100% { transform: translateY(0); opacity: 0.2; }
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .options label {
+      display: block;
+      margin: 12px 0;
+      font-size: 18px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .options input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    .options label:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .submit-btn {
+      display: block;
+      margin: 30px auto 10px;
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #f66;
+      color: white;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #e44;
+    }
+
+    .result, .reward {
+      margin-top: 25px;
+      font-size: 18px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    .reward h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      animation: sparkle 2s infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #f0f; }
+      50% { color: #ff99ff; text-shadow: 0 0 15px #ff99ff, 0 0 30px #f0f; }
+    }
+
+    .claim-btn {
+      margin-top: 15px;
+      background: #48e;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .claim-btn:hover {
+      background: #36c;
+    }
+
+    .music-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .emoji-top-left {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 30px;
+    }
+
+    .emoji-bottom-center {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Music & Toggle -->
+  <audio id="bgMusic" loop>
+    <source src="surprise.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+  <div class="music-toggle" onclick="toggleMusic()">🫢</div>
+
+  <!-- Floating background emojis -->
+  <div class="emoji-floating emoji1">✨</div>
+  <div class="emoji-floating emoji2">🥺</div>
+  <div class="emoji-floating emoji3">💟</div>
+
+  <!-- Positioned emojis like other memories -->
+  <div class="emoji-top-left">♡</div>
+  <div class="emoji-bottom-center">♪</div>
+
+  <div class="container">
+    <h1>"Mujhe taste krna hai" yaad aya kuch? 😊</h1>
+    <p style="text-align:center;">
+      Yupp... yehi tha pehla step meri taraf se is relationship mein aane ka.. Ab is question ko answer karne ke liye “tum” nahi aapko “hum” banna padega (me + you)..  
+      <br><br>
+      phir Unn options ko tick karo jo tumhe lagta hai ki satisfy karta hai "taste" ka matlab...
+    </p>
+
+    <form id="tasteForm" class="options">
+      <label><input type="checkbox" name="taste" value="body">Body👅</label>
+      <label><input type="checkbox" name="taste" value="mentality">Mentality🙂</label>
+      <label><input type="checkbox" name="taste" value="cuddle">Cuddle🤗</label>
+      <label><input type="checkbox" name="taste" value="kiss">Kiss😘</label>
+      <label><input type="checkbox" name="taste" value="sadness">Sadness😞</label>
+      <label><input type="checkbox" name="taste" value="problem">Problem😢</label>
+      <label><input type="checkbox" name="taste" value="emotions">Emotions😚</label>
+      <label><input type="checkbox" name="taste" value="happiness">Happiness😄</label>
+      <label><input type="checkbox" name="taste" value="chatts">Chatts💬</label>
+      <label><input type="checkbox" name="taste" value="angry">Angry😠</label>
+      <label><input type="checkbox" name="taste" value="boringness">Boringness🥱</label>
+
+      <button type="button" class="submit-btn" onclick="showResult()">Submit</button>
+    </form>
+
+    <div class="result" id="result">
+      <strong>Perfect Answer</strong><br><br>
+       The thing is if tum koi bhi option choose ki ho sb sahi hai👀 taste ka matlab tha tumhara sab kuch mehsoos karna—your happiness, your sadness, your thoughts, your love, and your flaws. Everything. Because loving you meant tasting every bit of your world soo ab tumhe wo dedete hai jiske liye tum game khel rahi hoo🦆 reward🙃 is below...
+    </div>
+
+    <div class="reward" id="reward">
+    <h2>🎉You've Earned a Reward! 🎁</h2>
+      <p>Congratulations! You’ve unlocked a reward for knowing us deeply..just click on Get rewarded button below 🤗have fun..<br><br>
+      <strong>Reward:</strong> “A warm tight hug from me... whenever you want!”</p>
+      <a href="reward1.html" onclick="saveMusicState()">
+          <button class="claim-btn" onclick="parent.document.getElementById('content-frame').src = 'reward7.html'">Get Rewarded</button></a>
+    </div>
+  </div>
+
+  <script>
+    const bgMusic = document.getElementById('bgMusic');
+    const toggleBtn = document.querySelector('.music-toggle');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTime = localStorage.getItem("musicTime");
+      const wasPaused = localStorage.getItem("musicPaused") === "true";
+
+      if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+      if (!wasPaused) {
+        bgMusic.play();
+        toggleBtn.textContent = '🎵';
+      } else {
+        toggleBtn.textContent = '🫢';
+      }
+    });
+
+    function toggleMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        toggleBtn.textContent = '🎵';
+      } else {
+        bgMusic.pause();
+        toggleBtn.textContent = '🫢';
+      }
+    }
+
+    function saveMusicState() {
+      localStorage.setItem("musicTime", bgMusic.currentTime);
+      localStorage.setItem("musicPaused", bgMusic.paused);
+    }
+
+    function showResult() {
+      const checkboxes = document.querySelectorAll('input[name="taste"]:checked');
+      if (checkboxes.length === 0) {
+        alert("At least one option choose karo please!");
+        return;
+      }
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('reward').style.display = 'block';
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
