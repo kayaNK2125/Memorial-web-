@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory 1 - Flip</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1d4350, #a43931);
+      overflow: hidden;
+    }
+
+    .flip-card {
+      perspective: 1000px;
+    }
+
+    .flip-inner {
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      position: relative;
+      width: 100%;
+      min-height: 520px;
+    }
+
+    .flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+
+    .flip-front {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .flip-back {
+      background-color: rgba(0, 0, 0, 0.3);
+      transform: rotateY(180deg);
+      overflow-y: auto;
+    }
+
+    .floating {
+      animation: float 4s ease-in-out infinite;
+      position: absolute;
+      opacity: 0.7;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .message-bubble {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.85);
+      color: #000;
+      padding: 0.5rem 0.8rem;
+      border-radius: 1rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 50;
+    }
+
+    .bubble-show {
+      opacity: 1;
+    }
+
+    .correct {
+      background-color: #34d399 !important;
+      color: white !important;
+      animation: pulse 0.5s ease-in-out;
+    }
+
+    .wrong {
+      background-color: #f87171 !important;
+      color: white !important;
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body class="h-screen flex items-center justify-center text-white font-sans relative">
+
+  <!-- Floating Emojis with Message Bubbles -->
+  <div class="floating top-10 left-10" onclick="showBubble(this, 'hii jaanu')">★
+    <div class="message-bubble left-6 top-[-10px]">hii jaanu😘</div>
+  </div>
+  <div class="floating top-20 right-20" onclick="showBubble(this, 'tum bohot cute ho')">♡
+    <div class="message-bubble right-6 top-[-10px]">tum bohot cute ho😯</div>
+  </div>
+  <div class="floating bottom-10 left-1/2 transform -translate-x-1/2" onclick="showBubble(this, 'i love u forever')">♪
+    <div class="message-bubble left-6 top-[-10px]">i love u forever♾️</div>
+  </div>
+
+  <!-- Music Button -->
+  <div class="absolute top-4 right-4 z-50">
+    <button id="musicToggle" class="text-3xl" onclick="toggleMusic()">🫢</button>
+    <audio id="bgMusic" loop src="surprise.mp3"></audio>
+  </div>
+
+  <!-- Flip Card -->
+  <div class="flip-card w-[90%] max-w-lg min-h-[520px]" id="card">
+    <div id="flipBox" class="flip-inner rounded-xl">
+
+      <!-- Front Side -->
+      <div class="flip-front flex flex-col justify-center items-center text-center cursor-pointer" onclick="flipCard()">
+        <h2 class="text-4xl font-bold mb-4 text-yellow-300">Memory #1</h2>
+        <p class="text-xl md:text-2xl font-semibold text-white leading-snug max-w-xs drop-shadow-lg">
+          Where did we meet for the first time? easy hai tumhare liye👀 🙂 qki first question hai
+        </p>
+        <p class="text-sm mt-6 text-yellow-100 opacity-80">Tap to flip the card👀</p>
+      </div>
+
+      <!-- Back Side -->
+      <div class="flip-back flex flex-col justify-center items-center text-center space-y-4">
+        <h3 class="text-2xl font-semibold mb-2 text-yellow-200">
+          Choose the right answer.. between the options🙃💕 best of luck🐱
+        </h3>
+        <button onclick="checkAnswer(this, false)" class="bg-white text-black px-6 py-2 rounded-full hover:bg-yellow-300 transition">Park🏞️</button>
+        <button onclick="checkAnswer(this, false)" class="bg-white text-black px-6 py-2 rounded-full hover:bg-yellow-300 transition">Didi marriage💍</button>
+        <button onclick="checkAnswer(this, false)" class="bg-white text-black px-6 py-2 rounded-full hover:bg-yellow-300 transition">JHV Mall🏬</button>
+        <button onclick="checkAnswer(this, true)" class="bg-white text-black px-6 py-2 rounded-full hover:bg-yellow-300 transition">Your Home🏠</button>
+
+        <div id="messageBox" class="mt-4 text-base font-medium text-white text-center hidden max-w-sm px-3"></div>
+
+        <a href="memory2.html" id="nextBtn" class="hidden mt-4 inline-block bg-pink-500 hover:bg-pink-600 text-white font-semibold px-5 py-2 rounded-full transition">
+          Next Memory💌 →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Love Note -->
+  <div class="absolute bottom-3 right-4 text-sm text-white opacity-70">
+    with love for my love🫰🏻✨
+  </div>
+
+  <!-- Script -->
+  <script>
+    function flipCard() {
+      document.getElementById('flipBox').classList.add('flipped');
+    }
+
+    function checkAnswer(button, isCorrect) {
+      const messageBox = document.getElementById('messageBox');
+      const nextBtn = document.getElementById('nextBtn');
+      const allButtons = button.parentElement.querySelectorAll('button');
+
+      allButtons.forEach(btn => btn.disabled = true);
+
+      if (isCorrect) {
+        button.classList.add('correct');
+        button.innerText += ' ✔';
+        messageBox.innerHTML = `wow yaad hai tumhe 😅 mere ko laga glt kr doogi tum👀 qki hume laga tum choose krogi wedding💍 whithout kuch soche🌝🌚<br><br>chalo koi naa dekhte hai aage ke question kaise answer krtii hoo 😜... jaao next question prr 😄..`;
+      } else {
+        button.classList.add('wrong');
+        button.innerText += ' ✘';
+        messageBox.innerHTML = `yup so aapne galat answer choose kiya hai sherni badhai ho😏 koi na koi na chalta hai, shayad itna memories bana liye ki confuse kr gayi😁 hehe...<br><br>chalo aage dekhte hai kya kya yaad hai tumhe 😏`;
+      }
+
+      messageBox.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+    }
+
+    const bgMusic = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicToggle.textContent = '🫢';
+      } else {
+        bgMusic.play();
+        musicToggle.textContent = '🎵';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    function showBubble(emoji, text) {
+      const bubble = emoji.querySelector('.message-bubble');
+      bubble.classList.add('bubble-show');
+
+      setTimeout(() => {
+        bubble.classList.remove('bubble-show');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

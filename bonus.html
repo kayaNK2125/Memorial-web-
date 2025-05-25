@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bonus Memory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #0d0d2a, #1e0033);
+      color: #f0e6ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #ff90d0;
+    }
+    .memory-box {
+      background: rgba(30, 0, 51, 0.7);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(255, 0, 180, 0.2);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+    .music-icon {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+      margin: 20px 0;
+      border-radius: 10px;
+      border: 2px solid #ff70b5;
+      outline: none;
+      background-color: #2b0047;
+      color: #f0e6ff;
+    }
+    .btn {
+      background: #ff66a1;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #e05590;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .option {
+      background: #390058;
+      border: 2px solid #bb66ff;
+      padding: 10px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: transform 0.2s ease, background 0.3s;
+      color: #f9d0ff;
+    }
+    .option:hover {
+      background: #5c0096;
+      transform: scale(1.03);
+    }
+    .final-message {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #ff90d0;
+    }
+    .bonus-reward {
+      margin-top: 25px;
+      background-color: #240033;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 120, 255, 0.3);
+    }
+    .bonus-reward img, .bonus-reward video {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    .bonus-reward a {
+      color: #90e0ff;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .love-signature {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  font-size: 14px;
+  color: #ffb6e6;
+  opacity: 0.8;
+  pointer-events: none;
+}
+  </style>
+</head>
+<body>  <div class="memory-box">
+    <div class="music-icon" id="musicIcon" onclick="toggleMusic()">🫢</div>
+    <h1>Bonus Memory</h1>
+    <p id="story">Let’s go back to a very old memory… Neha di’s wedding. We were sitting on the stairs after the night-long puja, a bit bored. It was morning. We had breakfast — maybe chole bhature.. And you… you were wearing a frock. Can you guess the color? if answer kr lii too or Rewards dungaa🙃</p><div id="kissPrompt">
+  <p style="font-weight: 500;">Itna aage aagai ho toh hume bhi toh kuch do 👀tabhi options dunga😏</p>
+  <input type="text" id="kissInput" placeholder="Send emoji here..." />
+  <button class="btn" onclick="checkKiss()">Send</button>
+</div>
+
+<div id="questionPart" class="hidden">
+  <p style="margin-top: 10px;">Thank you 😊 Now… guess the right option:</p>
+  <div class="options">
+    <div class="option" onclick="checkAnswer('Black')">🖤 Black</div>
+    <div class="option" onclick="checkAnswer('Brown')">🤎 Brown</div>
+    <div class="option" onclick="checkAnswer('Blue')">💙 Blue</div>
+    <div class="option" onclick="checkAnswer('Red')">❤️ Red</div>
+  </div>
+</div>
+
+<div id="finalMessage" class="final-message hidden"></div>
+
+
+<div id="bonusReward" class="bonus-reward hidden">
+  <h3>Your Bonus Rewards</h3>
+  <p>Photos of us☺️:</p>
+  <img src="multi.png" alt="Photo" />
+  <p>Bee took my heart🐝 (video)♥️:</p>
+  <video controls>
+    <source src="bee.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p>Visit this special page:</p>
+  <a href="https://www.notion.so/Letters-Magic-1fdbf296d67480d2b1d1c5f6ff435f4d?pvs=4" target="_blank"> A lovely letter just for you🙃</a>
+</div>
+
+
+  </div>  <script>
+    let musicOn = false;
+
+    function toggleMusic() {
+      musicOn = !musicOn;
+      document.getElementById("musicIcon").textContent = musicOn ? '🎵' : '🫢';
+      // Add music play/pause logic here later
+    }
+
+    function checkKiss() {
+      const value = document.getElementById("kissInput").value;
+      const emojis = ['🫂', '👀', '🤗', '😘', '😚', '😍','👅'];
+      if (emojis.some(e => value.includes(e))) {
+        document.getElementById("kissPrompt").classList.add("hidden");
+        document.getElementById("questionPart").classList.remove("hidden");
+      } else {
+        alert("Hmm... I need a cute emoji first!");
+      }
+    }
+
+    function checkAnswer(choice) {
+      let message = "";
+      if (choice === "Black") {
+        message = "Yesss! You got it right🖤 Black is right answer🙃 kaffii kuch yaad hai tumhe nyc so grab ur reward below.🐱..";
+        document.getElementById("bonusReward").classList.remove("hidden");
+      } else {
+        message = "Oops, not this one. But still… you’re the best memory I ever had.";
+      }
+      document.getElementById("finalMessage").textContent = message;
+      document.getElementById("finalMessage").classList.remove("hidden");
+    }
+    
+  </script>
+  
+  <div class="love-signature">made with love for my love 💕</div></body>
+</html>
